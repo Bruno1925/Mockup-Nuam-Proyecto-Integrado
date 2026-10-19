@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuam - Carga Masiva</title>
+    
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #1e1e2f; color: #ffffff; margin: 0; padding: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #00ff88; padding-bottom: 10px; margin-bottom: 20px; }
+        .logo { font-size: 1.8rem; font-weight: bold; color: #00ff88; text-decoration: none; }
+        .user-info { font-size: 1rem; color: #aaaaaa; }
+        .toolbar { display: flex; gap: 15px; margin-bottom: 20px; background-color: #2a2a3f; padding: 15px; border-radius: 8px; align-items: center; }
+        .form-group { display: flex; flex-direction: column; margin-bottom: 15px; }
+        label { font-size: 0.9rem; margin-bottom: 5px; color: #cccccc; }
+        select, input { padding: 10px; border-radius: 4px; border: 1px solid #444; background-color: #1e1e2f; color: #fff; width: 100%; box-sizing: border-box; }
+        .btn { padding: 10px 20px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.3s; text-decoration: none; display: inline-block; }
+        .btn-primary { background-color: #00ff88; color: #121212; }
+        .btn-primary:hover { background-color: #00cc6a; }
+        .btn-secondary { background-color: #4a90e2; color: #fff; }
+        .btn-danger { background-color: #ff4757; color: #fff; }
+        table { width: 100%; border-collapse: collapse; background-color: #2a2a3f; border-radius: 8px; overflow: hidden; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #3a3a4f; }
+        th { background-color: #1a1a2e; color: #00ff88; }
+        tr:nth-child(even) { background-color: #242436; }
+        tr:hover { background-color: #32324a; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #2a2a3f; padding: 30px; border-radius: 10px; border: 1px solid #00ff88; }
+        .file-drop { border: 2px dashed #00ff88; padding: 40px; text-align: center; border-radius: 8px; background-color: #1e1e2f; margin-bottom: 20px; cursor: pointer; }
+    </style>
+
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="logo">NUAM Exchange | Mantenedor</a>
+        <div class="user-info">Operador: A. Pardo | B. Candia</div>
+    </div>
+    <div class="container">
+        <h2 style="color: #00ff88; margin-top: 0;">Carga Masiva de Calificaciones</h2>
+        <p style="color: #ccc; margin-bottom: 20px;">Sube el archivo proporcionado por la Bolsa de Comercio (.csv o .xlsx). El sistema validará la estructura y calculará los factores.</p>
+        
+        <div class="file-drop" onclick="document.getElementById('file-upload').click()">
+            <span style="font-size: 2rem;">📁</span><br>
+            <span style="color: #00ff88; font-weight: bold;">Haz clic aquí para seleccionar el archivo</span>
+            <input type="file" id="file-upload" accept=".csv, .xlsx" style="display: none;">
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 30px;">
+            <a href="index.html" class="btn btn-danger">Cancelar</a>
+            <a href="index.html" class="btn btn-primary" onclick="alert('Archivo procesado. Validación exitosa. Registros guardados.')">Procesar Archivo</a>
+        </div>
+    </div>
+</body>
+</html>
