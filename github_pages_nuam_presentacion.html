@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diseño de Solución - Nuam Exchange</title>
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #121212; color: #ffffff; overflow: hidden; }
+        .slider { width: 100vw; height: 100vh; position: relative; }
+        .slide { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.5s ease-in-out; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px; box-sizing: border-box; }
+        .slide.active { opacity: 1; z-index: 1; }
+        h1 { color: #00ff88; font-size: 3.5rem; margin-bottom: 20px; }
+        h2 { color: #00ff88; font-size: 2.5rem; margin-bottom: 20px; }
+        p, li { font-size: 1.5rem; line-height: 1.6; max-width: 900px; margin: 10px auto; text-align: left; }
+        ul { text-align: left; display: inline-block; margin-bottom: 20px; }
+        .accent { color: #00ff88; font-weight: bold; }
+        .controls { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 10; }
+        button { background-color: #00ff88; color: #121212; border: none; padding: 12px 25px; font-size: 1.2rem; cursor: pointer; margin: 0 10px; border-radius: 5px; font-weight: bold; transition: background-color 0.3s; }
+        button:hover { background-color: #00cc6a; }
+    </style>
+</head>
+<body>
+
+<div class="slider" id="slider">
+    <div class="slide active">
+        <h1>Diseño de Solución de Software</h1>
+        <p style="text-align: center; font-size: 2rem;">Mantenedor de Calificaciones Tributarias</p>
+        <p style="text-align: center; margin-top: 40px; font-size: 1.8rem;"><strong>Cliente:</strong> <span class="accent">Nuam Exchange</span></p>
+        <p style="text-align: center; margin-top: 60px; font-size: 1.2rem; color: #aaaaaa;">
+            Integrantes: Alonso Pardo, Bruno Candia<br>
+            Docente: Yaleni Gómez Peña
+        </p>
+    </div>
+
+    <div class="slide">
+        <h2>1. Metodología Ágil: Scrum</h2>
+        <ul>
+            <li><strong>Por qué Scrum:</strong> Flexibilidad ante cambios del SII.</li>
+            <li><strong>Sprints de 2 semanas:</strong> Entregas continuas de valor a Nuam.</li>
+            <li><strong>Fases Clave:</strong>
+                <ul>
+                    <li>Sprint 1: BD y Backend (Bloqueador)</li>
+                    <li>Sprint 2: Frontend e Interfaz</li>
+                    <li>Sprint 3: Lógica y Carga Masiva</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="slide">
+        <h2>2. Arquitectura (Modelo 4+1)</h2>
+        <ul>
+            <li><strong>Vista Lógica & Desarrollo:</strong> Separación en Frontend (SPA), Backend (API REST Python) y Persistencia.</li>
+            <li><strong>Vista de Procesos:</strong> Flujo de validación (Ej: Formato DD-MM-AAAA).</li>
+            <li><strong>Vista Física (Cloud):</strong> Alta disponibilidad con AWS EC2, RDS (PostgreSQL) y S3.</li>
+        </ul>
+    </div>
+
+    <div class="slide">
+        <h2>3. Modelo de Bases de Datos</h2>
+        <p>Implementación de <strong>Persistencia Políglota</strong>:</p>
+        <ul>
+            <li><strong>Estructurada (PostgreSQL):</strong> Core financiero transaccional (Usuarios, Calificaciones). Integridad de datos y límite del factor = 1.0.</li>
+            <li><strong>No Estructurada (MongoDB):</strong> Almacenamiento de <em>Logs de Auditoría</em> y errores de carga en JSON, aportando flexibilidad si cambian los formatos.</li>
+        </ul>
+    </div>
+
+    <div class="slide">
+        <h2>4. Seguridad (OWASP Top 10)</h2>
+        <ul>
+            <li><strong>Autenticación:</strong> Tokens JWT (expiración de 30 mins).</li>
+            <li><strong>Mitigación A01 (Broken Access):</strong> Validación de roles por endpoint, no solo ocultando vistas.</li>
+            <li><strong>Mitigación A03 (Inyección):</strong> Uso estricto de ORM para parametrizar consultas SQL.</li>
+            <li><strong>Validación:</strong> Rechazo de datos alfanuméricos en factores y manejo controlado de errores (sin Stack Traces).</li>
+        </ul>
+    </div>
+
+    <div class="slide">
+        <h2>5. Plan de Pruebas</h2>
+        <ul>
+            <li><strong>Unitarias (PyTest):</strong> Validación matemática estricta al 8vo decimal.</li>
+            <li><strong>Integración (Postman):</strong> Comunicación entre la API y la base de datos.</li>
+            <li><strong>Rendimiento (JMeter):</strong> Simulación de 50 usuarios haciendo carga masiva concurrente.</li>
+            <li><strong>Seguridad (OWASP ZAP):</strong> Escaneo de vulnerabilidades e intentos de inyección.</li>
+        </ul>
+    </div>
+</div>
+
+<div class="controls">
+    <button onclick="prevSlide()">Anterior</button>
+    <button onclick="nextSlide()">Siguiente</button>
+    <a href="mockup.html"><button style="background-color: #4a90e2; color: white;">Ver Mockup Interactivo</button></a>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) slide.classList.add('active');
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    }
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+    });
+</script>
+
+</body>
+</html>
